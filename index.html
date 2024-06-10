@@ -1,0 +1,22 @@
+<html>  
+    <head>
+        <meta charset="utf-8" />
+        <title>korsstygn.se</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="palette">
+            <span id="black" style="color: black;" onclick="selectColor(this)">svart</span>
+            <span id="red" style="color: red;" onclick="selectColor(this)">röd</span>
+            <span id="blue" style="color: blue;" onclick="selectColor(this)">blå</span>
+            <span id="green" style="color: green;" onclick="selectColor(this)">grön</span>
+            <span id="white" style="color: black;" onclick="selectColor(this)">sudda</span>
+            <span id="currentColor">Selected color</span>
+            <span>Antal kolumner: </span><input id="numberOfColumns" onchange="setup()">
+            <span>Antal rader: </span><input id="numberOfRows" onchange="setup()">
+            <button onclick="reset()">reset</button>
+        </div>
+        <div id="container"></div>
+        <script src="index.js"></script>
+    </body>
+</html>

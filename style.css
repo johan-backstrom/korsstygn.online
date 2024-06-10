@@ -1,0 +1,27 @@
+.box {
+  border-width: 1px;
+  border-color: lightgray;
+  border-top-style: solid;
+  border-left-style: solid;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 30;
+  cursor: crosshair;
+}
+
+#container {
+  border-width: 1px;
+  border-color: gray;
+  border-style: solid;
+  width: fit-content;
+}
+
+#palette {
+  width: 1000px;
+  border-width: 5px;
+  border-color: gray;
+  border-style: solid;
+  padding: 10px;
+}
