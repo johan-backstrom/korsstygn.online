@@ -1,38 +1,45 @@
-let currentColor = "black";
 let values = {};
 const checkmark = '&#10006;';
+let mouseIsDown = false;
 
 function markWithX(e) {
-  const value = e.currentTarget.innerHTML.charCodeAt(0) === 10006 &&  e.currentTarget.style.color === currentColor ? '' : checkmark
-  e.currentTarget.innerHTML = value;
-  e.currentTarget.style.color = currentColor;
-  if (!values[e.currentTarget.y]) {
-    values[e.currentTarget.y] = {};
+  currentValue = (values[e.currentTarget.row] ? values[e.currentTarget.row][e.currentTarget.col] : null) || {} 
+  if (currentValue.checked && currentValue.color == getColor()) {
+    e.currentTarget.innerHTML = '';
+    delete e.currentTarget.style.color
+    delete values[e.currentTarget.row][e.currentTarget.col]
+  } else {
+    e.currentTarget.innerHTML = checkmark;
+    e.currentTarget.style.color = getColor();
+    values[e.currentTarget.row] ??= {};
+    values[e.currentTarget.row][e.currentTarget.col] = { checked: true, color: getColor() }
   }
-  values[e.currentTarget.y][e.currentTarget.x] = { checked: true, color: currentColor }
   const jsonValues = JSON.stringify(values)
   localStorage.setItem("korsstygn", jsonValues);
 }
 
 function reset() {
   localStorage.clear();
-  document.getElementById("container").innerHTML = '';
+  document.getElementById("color").value = '#000000'
   setup()
 }
 
-function selectColor(e) {
-  currentColor = e.id
-  document.getElementById("currentColor").style.color = currentColor;
+function getColor() {
+  return document.getElementById("color").value;
 }
 
 function setup() {
-  const rowNumberElement = document.getElementById("numberOfRows");
-  const columnNumberElement = document.getElementById("numberOfColumns");
-  rowNumberElement.value = rowNumberElement.value || 40;
-  columnNumberElement.value = columnNumberElement.value || 60;
 
-  const xBoxes = columnNumberElement.value;
-  const yBoxes = rowNumberElement.value;
+  storedSize = JSON.parse(localStorage.getItem("korsstygnStorlek") || '{}');
+  const columns = document.getElementById("numberOfColumns").value || storedSize?.columns || 60;
+  const rows = document.getElementById("numberOfRows").value || storedSize?.rows || 40;
+  document.getElementById("numberOfRows").value = rows;
+  document.getElementById("numberOfColumns").value = columns;
+
+  localStorage.setItem("korsstygnStorlek", JSON.stringify({
+    columns,
+    rows
+  }))
 
   try {
     values = JSON.parse(localStorage.getItem("korsstygn")) || {};
@@ -41,19 +48,19 @@ function setup() {
     localStorage.clear();
   }
   document.getElementById("container").innerHTML = '';
-  for (let y = 0; y < yBoxes; y++) {
+  for (let r = 0; r < rows; r++) {
     let row = document.createElement("div");
     row.style = "display: flex;";
-    for (let x = 0; x < xBoxes; x++) {
+    for (let c = 0; c < columns; c++) {
       let element = document.createElement("div");
-      element.addEventListener("click", markWithX);
-      if (values[y] && values[y][x]?.checked){
+      element.addEventListener("mousedown", markWithX);
+      if (values[r] && values[r][c]?.checked){
         element.innerHTML = checkmark;
-        element.style.color = values[y][x].color;
+        element.style.color = values[r][c].color;
       }
       element.className = "box";
-      element.x = x
-      element.y = y
+      element.col = c
+      element.row = r
       row.appendChild(element);
     }
     document.getElementById("container").appendChild(row); 

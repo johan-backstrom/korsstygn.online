@@ -6,14 +6,12 @@
     </head>
     <body>
         <div id="palette">
-            <span id="black" style="color: black;" onclick="selectColor(this)">svart</span>
-            <span id="red" style="color: red;" onclick="selectColor(this)">röd</span>
-            <span id="blue" style="color: blue;" onclick="selectColor(this)">blå</span>
-            <span id="green" style="color: green;" onclick="selectColor(this)">grön</span>
-            <span id="white" style="color: black;" onclick="selectColor(this)">sudda</span>
-            <span id="currentColor">Selected color</span>
-            <span>Antal kolumner: </span><input id="numberOfColumns" onchange="setup()">
-            <span>Antal rader: </span><input id="numberOfRows" onchange="setup()">
+            <span>Färg: </span>
+            <input id="color" type="color" value="#000000" onchange="selectColor(this)">
+            <span>Kolumner: </span>
+            <input id="numberOfColumns" onchange="setup()">
+            <span>Rader: </span>
+            <input id="numberOfRows" onchange="setup()">
             <button onclick="reset()">reset</button>
         </div>
         <div id="container"></div>
