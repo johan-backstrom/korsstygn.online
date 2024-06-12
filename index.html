@@ -1,7 +1,7 @@
 <html>  
     <head>
         <meta charset="utf-8" />
-        <title>korsstygn.se</title>
+        <title>Korsstygn online</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -9,12 +9,14 @@
             <span>Färg: </span>
             <input id="color" type="color" value="#000000" onchange="selectColor(this)">
             <span>Kolumner: </span>
-            <input id="numberOfColumns" onchange="setup()">
+            <input id="numberOfColumns" onchange="setWidth(this.value)">
             <span>Rader: </span>
-            <input id="numberOfRows" onchange="setup()">
-            <button onclick="reset()">reset</button>
+            <input id="numberOfRows" onchange="setHeight(this.value)">
+            <button onclick="reset()">rensa</button>
+            <button onclick="printFriendly()">skriv ut</button>
         </div>
-        <div id="container"></div>
-        <script src="index.js"></script>
+        <div id="container" class="editContainer"></div>
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript">window.onload = () => setUpEditMode()</script>
     </body>
 </html>

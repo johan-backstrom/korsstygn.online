@@ -1,4 +1,4 @@
-.box {
+.editBox {
   border-width: 1px;
   border-color: lightgray;
   border-top-style: solid;
@@ -12,11 +12,31 @@
   overflow: hidden;
 }
 
-#container {
+.printBox {
+  border-width: 1px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 40;
+  cursor: crosshair;
+  overflow: hidden;
+}
+
+
+.editContainer {
   border-width: 1px;
   border-color: gray;
   border-style: solid;
   width: fit-content;
+}
+
+.printContainer {
+  border-width: 5px;
+  border-color: lightgray;
+  border-style: inset;
+  width: fit-content;
+  padding: 30;
 }
 
 #palette {
@@ -26,4 +46,13 @@
   border-style: solid;
   padding: 10px;
   margin: 10px;
+}
+
+#info {
+  font-size: 11;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+  width: 40px;
 }
